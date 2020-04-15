@@ -4,14 +4,18 @@
     <button @click="buyNewSpell">Buy new random spell: 1000</button>
     <button @click="buyNewSlot">But additional slot: 100000</button>
     <div class="inner-container">
-      <div>
-        <spell-slot
-          v-for="(spell, index) in allSpells"
-          :key="index"
-          :spell="spell"
-        />
+      <div class="left">
+        <h3>Library</h3>
+        <div class="library">
+          <spell-slot
+            v-for="(spell, index) in allSpells"
+            :key="index"
+            :spell="spell"
+          />
+        </div>
       </div>
-      <div>
+      <div class="right">
+        <h3>Spell chain</h3>
         <spell-slot
           v-for="(spell, index) in chain.spells"
           :spell="spell"
@@ -59,9 +63,21 @@ export default class Library extends Vue {
 .outer-container {
   display: flex;
   flex-direction: column;
+  align-content: center;
 }
 
 .inner-container {
   display: flex;
+  width: 640px;
+  margin: auto;
+}
+
+.left {
+  flex: 1;
+}
+
+.library {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
