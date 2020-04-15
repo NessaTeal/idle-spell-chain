@@ -1,20 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <Library />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import Library from "./components/Library.vue";
 
 @Component({
   components: {
-    HelloWorld
+    Library
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+    this.loop();
+  }
+
+  loop() {
+    this.$store.state.chain.invoke();
+    requestAnimationFrame(this.loop);
+  }
+}
 </script>
 
 <style>
@@ -24,6 +32,5 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
