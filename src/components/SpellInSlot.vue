@@ -1,5 +1,9 @@
 <template>
-  <div @mousedown="startDrag" class="spell" :style="dynamicStyle">
+  <div
+    @mousedown="startDrag"
+    :class="'spell ' + spell.effect.class"
+    :style="dynamicStyle"
+  >
     <b>{{ spell.name }}</b>
     <p>{{ spell.effect.description }}</p>
   </div>
@@ -58,7 +62,18 @@ export default class SpellInSlot extends Vue {
 .spell {
   height: 100px;
   width: 100px;
-  background: cyan;
   user-select: none;
+}
+
+.adder {
+  background: lightgreen;
+}
+
+.multiplier {
+  background: palevioletred;
+}
+
+.invoker {
+  background: goldenrod;
 }
 </style>
