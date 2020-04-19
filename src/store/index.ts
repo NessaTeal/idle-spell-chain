@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Spell from "@/classes/Spell";
+import Spell from "@/classes/spells/Spell";
 import { Addition, Multiply, Invoke } from "@/classes/effects";
 import Chain from "@/classes/Chain";
+import SpellFactory from "@/classes/spells/SpellFactory";
 
 Vue.use(Vuex);
 
@@ -56,14 +57,7 @@ export default new Vuex.Store({
 
       state.mana -= 1000;
 
-      const random = Math.random();
-      if (random < 0.5) {
-        const secondRandom = Math.random() * 5 + 1;
-        state.spells.push(new Spell("Multiplier", new Multiply(secondRandom)));
-      } else {
-        const secondRandom = Math.random() * 49 + 1;
-        state.spells.push(new Spell("Adder", new Addition(secondRandom)));
-      }
+      state.spells.push(SpellFactory.generateSpell());
     },
     buyNewSlot(state) {
       if (state.mana < 100000) {

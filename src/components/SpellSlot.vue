@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import Spell from "@/classes/Spell";
+import Spell from "@/classes/spells/Spell";
 import SpellInSlot from "./SpellInSlot.vue";
 
 @Component({

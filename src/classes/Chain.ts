@@ -1,4 +1,4 @@
-import Spell from "./Spell";
+import Spell from "./spells/Spell";
 
 export default class Chain {
   spells: Array<Spell | undefined> = new Array(3);
