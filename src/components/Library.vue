@@ -1,9 +1,7 @@
 <template>
   <div class="outer-container">
     <top-bar />
-    <button @click="buyNewSpell">Buy new random spell: 1000</button>
-    <button @click="increaseEntropy">Increase entropy: 10000</button>
-    <button @click="buyNewSlot">But additional slot: 100000</button>
+    <shop />
     <div class="inner-container">
       <div class="left">
         <h3>Library</h3>
@@ -32,11 +30,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import SpellSlot from "./SpellSlot.vue";
 import TopBar from "./TopBar.vue";
+import Shop from "./Shop.vue";
 
 @Component({
   components: {
     SpellSlot,
-    TopBar
+    TopBar,
+    Shop
   }
 })
 export default class Library extends Vue {
@@ -46,18 +46,6 @@ export default class Library extends Vue {
 
   get chain() {
     return this.$store.state.chain;
-  }
-
-  buyNewSpell() {
-    this.$store.commit("buyNewSpell");
-  }
-
-  buyNewSlot() {
-    this.$store.commit("buyNewSlot");
-  }
-
-  increaseEntropy() {
-    this.$store.commit("increaseEntropy");
   }
 }
 </script>
