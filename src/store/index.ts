@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Spell from "@/classes/Spell";
-import { Multiply, Adder, Invoke } from "@/classes/Effect";
+import { Addition, Multiply, Invoke } from "@/classes/effects";
 import Chain from "@/classes/Chain";
 
 Vue.use(Vuex);
@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell("Small adder", new Adder(2)),
+      new Spell("Small adder", new Addition(2)),
       new Spell("Doubler", new Multiply(2)),
       new Spell("Tripler", new Multiply(3)),
       new Spell("Invoker", new Invoke())
@@ -62,7 +62,7 @@ export default new Vuex.Store({
         state.spells.push(new Spell("Multiplier", new Multiply(secondRandom)));
       } else {
         const secondRandom = Math.random() * 49 + 1;
-        state.spells.push(new Spell("Adder", new Adder(secondRandom)));
+        state.spells.push(new Spell("Adder", new Addition(secondRandom)));
       }
     },
     buyNewSlot(state) {
