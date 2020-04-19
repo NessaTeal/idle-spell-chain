@@ -1,7 +1,6 @@
 <template>
   <div class="outer-container">
-    <div>Mana: {{ Math.floor(mana) }}</div>
-    <div>Entropy: {{ entropy }}</div>
+    <top-bar />
     <button @click="buyNewSpell">Buy new random spell: 1000</button>
     <button @click="increaseEntropy">Increase entropy: 10000</button>
     <button @click="buyNewSlot">But additional slot: 100000</button>
@@ -32,10 +31,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import SpellSlot from "./SpellSlot.vue";
+import TopBar from "./TopBar.vue";
 
 @Component({
   components: {
-    SpellSlot
+    SpellSlot,
+    TopBar
   }
 })
 export default class Library extends Vue {
@@ -45,14 +46,6 @@ export default class Library extends Vue {
 
   get chain() {
     return this.$store.state.chain;
-  }
-
-  get mana() {
-    return this.$store.state.mana;
-  }
-
-  get entropy() {
-    return this.$store.state.entropy;
   }
 
   buyNewSpell() {
