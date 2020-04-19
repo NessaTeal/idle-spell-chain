@@ -49,7 +49,7 @@ export default new Vuex.Store({
       }
 
       spell.slot = slot;
-      state.chain.spells[slot] = spell;
+      Vue.set(state.chain.spells, slot, spell);
     },
     buyNewSpell(state) {
       if (state.mana < 1000) {
