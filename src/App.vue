@@ -33,12 +33,17 @@ import TopBar from "./components/TopBar.vue";
   }
 })
 export default class App extends Vue {
+  lastTimestamp = 0;
+
   created() {
-    this.loop();
+    this.loop(0);
   }
 
-  loop() {
-    this.$store.state.chain.invoke();
+  loop(timestamp: number) {
+    const delta = timestamp - this.lastTimestamp;
+    this.lastTimestamp = timestamp;
+
+    this.$store.state.chain.invoke(delta);
     requestAnimationFrame(this.loop);
   }
 }

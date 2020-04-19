@@ -5,8 +5,8 @@ export default class Invoke implements Effect {
   description = `Add current number as mana`;
   class = "invoker";
 
-  apply(input: number): number {
-    store.commit("addMana", { mana: input });
+  apply(input: number, delta: number): number {
+    store.commit("addMana", { mana: (input * delta) / 1000 });
     return input;
   }
 }
