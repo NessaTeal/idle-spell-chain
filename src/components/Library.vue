@@ -14,13 +14,7 @@
         </div>
       </div>
       <div class="right">
-        <h3>Spell chain</h3>
-        <spell-slot
-          v-for="(spell, index) in chain.spells"
-          :spell="spell"
-          :key="index"
-          insertable="true"
-        />
+        <spell-chain />
       </div>
     </div>
   </div>
@@ -31,21 +25,19 @@ import { Component, Vue } from "vue-property-decorator";
 import SpellSlot from "./SpellSlot.vue";
 import TopBar from "./TopBar.vue";
 import Shop from "./Shop.vue";
+import SpellChain from "./SpellChain.vue";
 
 @Component({
   components: {
     SpellSlot,
     TopBar,
-    Shop
+    Shop,
+    SpellChain
   }
 })
 export default class Library extends Vue {
   get allSpells() {
     return this.$store.state.spells;
-  }
-
-  get chain() {
-    return this.$store.state.chain;
   }
 }
 </script>
