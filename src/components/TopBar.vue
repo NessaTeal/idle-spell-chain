@@ -5,18 +5,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { State } from "vuex-class";
 
 @Component
 export default class TopBar extends Vue {
-  get mana() {
-    return this.$store.state.mana;
-  }
-
-  get entropy() {
-    return this.$store.state.entropy;
-  }
+  @State mana!: number;
+  @State entropy!: number;
 }
 </script>
 

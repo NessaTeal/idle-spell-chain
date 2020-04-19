@@ -6,15 +6,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Mutation } from "vuex-class";
 
 @Component
 export default class Shop extends Vue {
-  @Mutation buyNewSpell;
-  @Mutation buyNewSlot;
-  @Mutation increaseEntropy;
+  @Mutation buyNewSpell!: () => void;
+  @Mutation buyNewSlot!: () => void;
+  @Mutation increaseEntropy!: () => void;
 }
 </script>
 
