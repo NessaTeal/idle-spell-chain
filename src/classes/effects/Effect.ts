@@ -1,3 +1,3 @@
 export default interface Effect {
-  apply(input: number): number;
+  apply(input: number, delta: number): number;
 }
