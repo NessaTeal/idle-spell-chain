@@ -1,7 +1,9 @@
 <template>
   <div class="outer-container">
     <div>Mana: {{ Math.floor(mana) }}</div>
+    <div>Entropy: {{ entropy }}</div>
     <button @click="buyNewSpell">Buy new random spell: 1000</button>
+    <button @click="increaseEntropy">Increase entropy: 10000</button>
     <button @click="buyNewSlot">But additional slot: 100000</button>
     <div class="inner-container">
       <div class="left">
@@ -49,12 +51,20 @@ export default class Library extends Vue {
     return this.$store.state.mana;
   }
 
+  get entropy() {
+    return this.$store.state.entropy;
+  }
+
   buyNewSpell() {
     this.$store.commit("buyNewSpell");
   }
 
   buyNewSlot() {
     this.$store.commit("buyNewSlot");
+  }
+
+  increaseEntropy() {
+    this.$store.commit("increaseEntropy");
   }
 }
 </script>

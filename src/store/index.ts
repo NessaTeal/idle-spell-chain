@@ -16,6 +16,7 @@ export default new Vuex.Store({
       new Spell("Invoker", new Invoke())
     ],
     mana: 0,
+    entropy: 1,
     chain: new Chain(),
     dropzones: new Array<Element>()
   },
@@ -67,6 +68,14 @@ export default new Vuex.Store({
       state.mana -= 100000;
 
       state.chain.spells.length++;
+    },
+    increaseEntropy(state) {
+      if (state.mana < 10000) {
+        return;
+      }
+
+      state.mana -= 10000;
+      state.entropy++;
     }
   },
   actions: {},
