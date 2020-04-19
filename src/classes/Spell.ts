@@ -1,4 +1,4 @@
-import Effect from "./Effect";
+import Effect from "./effects/Effect";
 
 export default class Spell {
   id!: string;
