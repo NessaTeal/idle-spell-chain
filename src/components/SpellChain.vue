@@ -10,10 +10,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { State } from "vuex-class";
-import SpellSlot from "./SpellSlot";
+import Chain from "../classes/Chain";
+import SpellSlot from "./SpellSlot.vue";
 
 @Component({
   components: {
@@ -21,7 +22,7 @@ import SpellSlot from "./SpellSlot";
   }
 })
 export default class Shop extends Vue {
-  @State chain;
+  @State chain!: Chain;
 }
 </script>
 
