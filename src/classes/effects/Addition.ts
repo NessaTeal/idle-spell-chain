@@ -1,9 +1,10 @@
 import Effect from "./Effect";
+import EffectClass from "./EffectClass";
 
 export default class Addition implements Effect {
-  addend!: number;
+  addend: number;
   description: string;
-  class = "adder";
+  class = EffectClass.ADDITION;
 
   constructor(addend: number) {
     this.addend = addend;

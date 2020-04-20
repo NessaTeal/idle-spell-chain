@@ -1,7 +1,6 @@
 import Effect from "../effects/Effect";
 
 export default class Spell {
-  id!: string;
   name!: string;
   effect!: Effect;
   slot: number | undefined;

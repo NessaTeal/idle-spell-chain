@@ -1,12 +1,17 @@
-import store from "../../store/index";
 import Effect from "./Effect";
+import EffectClass from "./EffectClass";
 
 export default class Invoke implements Effect {
   description = `Add current number as mana`;
-  class = "invoker";
+  class = EffectClass.INVOKE;
+  callback: (arg0: object) => void;
+
+  constructor(callback: (arg0: object) => void) {
+    this.callback = callback;
+  }
 
   apply(input: number, delta: number): number {
-    store.commit("addMana", { mana: (input * delta) / 1000 });
+    this.callback({ mana: (input * delta) / 1000 });
     return input;
   }
 }
