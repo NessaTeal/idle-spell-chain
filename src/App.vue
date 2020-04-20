@@ -34,8 +34,10 @@ import TopBar from "./components/TopBar.vue";
 })
 export default class App extends Vue {
   lastTimestamp = 0;
+  saveTimer = 15 * 1000;
 
   created() {
+    this.$store.commit("load");
     this.loop(0);
   }
 
@@ -44,6 +46,13 @@ export default class App extends Vue {
     this.lastTimestamp = timestamp;
 
     this.$store.state.chain.invoke(delta);
+
+    this.saveTimer -= delta;
+    if (this.saveTimer < 0) {
+      this.saveTimer = 15 * 1000;
+      this.$store.commit("save");
+    }
+
     requestAnimationFrame(this.loop);
   }
 }

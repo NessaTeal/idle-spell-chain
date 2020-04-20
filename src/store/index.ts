@@ -4,6 +4,7 @@ import Spell from "@/classes/spells/Spell";
 import { Addition, Multiply, Invoke } from "@/classes/effects";
 import Chain from "@/classes/Chain";
 import SpellFactory from "@/classes/spells/SpellFactory";
+import SaveFile from "@/classes/SaveFile";
 
 Vue.use(Vuex);
 
@@ -17,7 +18,7 @@ export default new Vuex.Store({
     ],
     mana: 0,
     entropy: 1,
-    chain: new Chain(),
+    chain: Chain.emptyChain(),
     dropzones: new Array<Element>()
   },
   mutations: {
@@ -76,6 +77,30 @@ export default new Vuex.Store({
 
       state.mana -= 10000;
       state.entropy++;
+    },
+    save(state) {
+      const saveFile = {
+        spells: state.spells,
+        chain: state.chain,
+        mana: state.mana,
+        entropy: state.entropy
+      };
+
+      localStorage.setItem("saveFile", JSON.stringify(saveFile));
+    },
+    load(state) {
+      const saveFileString = localStorage.getItem("saveFile");
+      if (saveFileString != null) {
+        const saveFile = JSON.parse(saveFileString) as SaveFile;
+        Vue.set(state, "mana", saveFile.mana);
+        Vue.set(state, "entropy", saveFile.entropy);
+        Vue.set(state, "chain", Chain.deserialize(saveFile.chain));
+        Vue.set(
+          state,
+          "spells",
+          saveFile.spells.map(spell => Spell.deserialize(spell))
+        );
+      }
     }
   },
   actions: {},

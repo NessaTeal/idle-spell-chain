@@ -1,7 +1,15 @@
 import Spell from "./spells/Spell";
 
 export default class Chain {
-  spells: Array<Spell | undefined> = new Array(3);
+  spells: Array<Spell | undefined>;
+
+  constructor(spells: Array<Spell | undefined>) {
+    this.spells = spells;
+  }
+
+  static emptyChain() {
+    return new Chain(new Array(3));
+  }
 
   invoke(delta: number) {
     this.spells.reduce((acc: number, val: Spell | undefined) => {
@@ -11,5 +19,11 @@ export default class Chain {
 
       return val.effect.apply(acc, delta);
     }, 0);
+  }
+
+  static deserialize(chain: Chain): Chain {
+    return new Chain(
+      chain.spells.map(spell => (spell ? Spell.deserialize(spell) : undefined))
+    );
   }
 }
