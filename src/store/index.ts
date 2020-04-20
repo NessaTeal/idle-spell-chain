@@ -7,21 +7,35 @@ import SaveFile from "@/classes/SaveFile";
 import EffectFactory from "@/classes/effects/EffectFactory";
 import deserializeChain from "@/classes/chain/ChainDeserializer";
 import deserializeSpell from "@/classes/spells/SpellDeserializer";
+import { ADDITION_STARTING_POWER } from "@/classes/effects/Addition";
+import { MULTIPLY_STARTING_POWER } from "@/classes/effects/Multiply";
 
 Vue.use(Vuex);
+
+const SPELL_COST_INCREASE = 1.1;
+const ENTROPY_COST_INCREASE = 1.5;
+const SLOT_COST_INCREASE = 10;
 
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell("Small adder", EffectFactory.generateAddition(2)),
-      new Spell("Doubler", EffectFactory.generateMultiply(2)),
-      new Spell("Tripler", EffectFactory.generateMultiply(3)),
+      new Spell(
+        "Small adder",
+        EffectFactory.generateAddition(ADDITION_STARTING_POWER)
+      ),
+      new Spell(
+        "Doubler",
+        EffectFactory.generateMultiply(MULTIPLY_STARTING_POWER)
+      ),
       new Spell("Invoker", EffectFactory.generateInvoke())
     ],
     mana: 0,
     entropy: 1,
     chain: Chain.emptyChain(),
-    dropzones: new Array<Element>()
+    dropzones: new Array<Element>(),
+    spellCost: 10,
+    entropyCost: 100,
+    slotCost: 1000
   },
   mutations: {
     addMana(state, { mana }) {
@@ -55,29 +69,30 @@ export default new Vuex.Store({
       Vue.set(state.chain.spells, slot, spell);
     },
     buyNewSpell(state) {
-      if (state.mana < 1000) {
+      if (state.mana < state.spellCost) {
         return;
       }
 
-      state.mana -= 1000;
-
+      state.mana -= state.spellCost;
+      state.spellCost *= SPELL_COST_INCREASE;
       state.spells.push(SpellFactory.generateSpell());
     },
     buyNewSlot(state) {
-      if (state.mana < 100000) {
+      if (state.mana < state.slotCost) {
         return;
       }
 
-      state.mana -= 100000;
-
+      state.mana -= state.slotCost;
+      state.slotCost *= SLOT_COST_INCREASE;
       state.chain.spells.push(undefined);
     },
     increaseEntropy(state) {
-      if (state.mana < 10000) {
+      if (state.mana < state.entropyCost) {
         return;
       }
 
-      state.mana -= 10000;
+      state.mana -= state.entropyCost;
+      state.entropyCost *= ENTROPY_COST_INCREASE;
       state.entropy++;
     },
     save(state) {
@@ -85,7 +100,10 @@ export default new Vuex.Store({
         spells: state.spells,
         chain: state.chain,
         mana: state.mana,
-        entropy: state.entropy
+        entropy: state.entropy,
+        slotCost: state.slotCost,
+        spellCost: state.spellCost,
+        entropyCost: state.entropyCost
       };
 
       localStorage.setItem("saveFile", JSON.stringify(saveFile));
@@ -96,6 +114,9 @@ export default new Vuex.Store({
         const saveFile = JSON.parse(saveFileString) as SaveFile;
         Vue.set(state, "mana", saveFile.mana);
         Vue.set(state, "entropy", saveFile.entropy);
+        Vue.set(state, "slotCost", saveFile.slotCost);
+        Vue.set(state, "spellCost", saveFile.spellCost);
+        Vue.set(state, "entropyCost", saveFile.entropyCost);
         Vue.set(state, "chain", deserializeChain(saveFile.chain));
         Vue.set(
           state,

@@ -1,6 +1,8 @@
 import Effect from "./Effect";
 import EffectClass from "./EffectClass";
 
+export const ADDITION_STARTING_POWER = 1.5;
+
 export default class Addition implements Effect {
   addend: number;
   description: string;
