@@ -1,6 +1,8 @@
 import store from "@/store";
 import { Addition, Multiply, Invoke } from ".";
 import Effect from "./Effect";
+import { ADDITION_STARTING_POWER } from "./Addition";
+import { MULTIPLY_STARTING_POWER } from "./Multiply";
 
 export default class EffectFactory {
   static generateRandomEffect(): Effect {
@@ -8,9 +10,9 @@ export default class EffectFactory {
     const random = Math.random();
 
     if (random <= 0.5) {
-      return new Multiply(1.1 + variedEntropy / 20);
+      return new Multiply(MULTIPLY_STARTING_POWER + variedEntropy / 5);
     } else {
-      return new Addition(1 + variedEntropy);
+      return new Addition(ADDITION_STARTING_POWER + variedEntropy * 2);
     }
   }
 

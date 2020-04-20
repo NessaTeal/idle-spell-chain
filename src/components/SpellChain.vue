@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { State } from "vuex-class";
-import Chain from "../classes/Chain";
+import Chain from "../classes/chain/Chain";
 import SpellSlot from "./SpellSlot.vue";
 
 @Component({

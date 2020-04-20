@@ -1,6 +1,8 @@
 import Effect from "./Effect";
 import EffectClass from "./EffectClass";
 
+export const MULTIPLY_STARTING_POWER = 2;
+
 export default class Multiply implements Effect {
   multiplier!: number;
   description: string;
