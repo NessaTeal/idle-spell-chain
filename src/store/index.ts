@@ -70,7 +70,7 @@ export default new Vuex.Store({
 
       state.mana -= 100000;
 
-      state.chain.spells.length++;
+      state.chain.spells.push(undefined);
     },
     increaseEntropy(state) {
       if (state.mana < 10000) {
