@@ -17,7 +17,7 @@ export default class Chain {
         return acc;
       }
 
-      return val.effect.apply(acc, delta);
+      return val.cast(acc, delta);
     }, 0);
   }
 }

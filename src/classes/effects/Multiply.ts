@@ -1,18 +1,12 @@
 import Effect from "./Effect";
 import EffectClass from "./EffectClass";
 
-export const MULTIPLY_STARTING_POWER = 2;
+const MULTIPLY_STARTING_POWER = 2;
 
 export default class Multiply implements Effect {
-  multiplier!: number;
-  description: string;
   class = EffectClass.MULTIPLY;
-  constructor(multiplier: number) {
-    this.multiplier = multiplier;
-    this.description = `Multiply number by ${this.multiplier.toFixed(2)}`;
-  }
 
-  apply(input: number): number {
-    return input * this.multiplier;
+  apply(input: number, spellPower: number): number {
+    return input * (MULTIPLY_STARTING_POWER + spellPower / 5);
   }
 }

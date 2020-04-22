@@ -10,7 +10,7 @@ export default class Invoke implements Effect {
     this.callback = callback;
   }
 
-  apply(input: number, delta: number): number {
+  apply(input: number, spellPower: number, delta: number): number {
     this.callback({ mana: (input * delta) / 1000 });
     return input;
   }

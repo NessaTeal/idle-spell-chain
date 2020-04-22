@@ -5,7 +5,8 @@
     :style="dynamicStyle"
   >
     <b>{{ spell.name }}</b>
-    <p>{{ spell.effect.description }}</p>
+    <p>Power: {{ spell.power.toFixed(3) }}</p>
+    <p>{{ spell.effect.class }}</p>
   </div>
 </template>
 
