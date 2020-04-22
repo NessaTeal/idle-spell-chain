@@ -7,8 +7,6 @@ import SaveFile from "@/classes/SaveFile";
 import EffectFactory from "@/classes/effects/EffectFactory";
 import deserializeChain from "@/classes/chain/ChainDeserializer";
 import deserializeSpell from "@/classes/spells/SpellDeserializer";
-import { ADDITION_STARTING_POWER } from "@/classes/effects/Addition";
-import { MULTIPLY_STARTING_POWER } from "@/classes/effects/Multiply";
 
 Vue.use(Vuex);
 
@@ -19,15 +17,9 @@ const SLOT_COST_INCREASE = 10;
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell(
-        "Small adder",
-        EffectFactory.generateAddition(ADDITION_STARTING_POWER)
-      ),
-      new Spell(
-        "Doubler",
-        EffectFactory.generateMultiply(MULTIPLY_STARTING_POWER)
-      ),
-      new Spell("Invoker", EffectFactory.generateInvoke())
+      new Spell("Small adder", 0.95, EffectFactory.generateAddition()),
+      new Spell("Doubler", 0.95, EffectFactory.generateMultiply()),
+      new Spell("Invoker", 0.95, EffectFactory.generateInvoke())
     ],
     mana: 0,
     entropy: 1,
