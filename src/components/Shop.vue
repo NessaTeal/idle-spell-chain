@@ -9,6 +9,9 @@
     <button @click="buyNewSlot">
       But additional slot: {{ Math.ceil(slotCost) }}
     </button>
+    <button @click="mergeSpells">
+      Merge all spells in Library into chain
+    </button>
   </div>
 </template>
 
@@ -25,6 +28,7 @@ export default class Shop extends Vue {
   @Mutation buyNewSpell!: () => void;
   @Mutation buyNewSlot!: () => void;
   @Mutation increaseEntropy!: () => void;
+  @Mutation mergeSpells!: () => void;
 }
 </script>
 

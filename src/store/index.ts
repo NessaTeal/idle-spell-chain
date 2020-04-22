@@ -87,6 +87,18 @@ export default new Vuex.Store({
       state.entropyCost *= ENTROPY_COST_INCREASE;
       state.entropy++;
     },
+    mergeSpells(state) {
+      state.spells.forEach(spell => {
+        const increase = spell.power / 50;
+        state.chain.spells.forEach(chainSpell => {
+          if (chainSpell) {
+            chainSpell.power += increase;
+          }
+        });
+      });
+
+      Vue.set(state, "spells", []);
+    },
     save(state) {
       const saveFile = {
         spells: state.spells,
