@@ -3,6 +3,7 @@ import Effect from "../effects/Effect";
 export default class Spell {
   name: string;
   power: number;
+  consumedPower = 0;
   effect: Effect;
   slot: number | undefined;
 
@@ -12,7 +13,11 @@ export default class Spell {
     this.effect = effect;
   }
 
+  totalPower(): number {
+    return this.power + this.consumedPower;
+  }
+
   cast(input: number, delta: number): number {
-    return this.effect.apply(input, this.power, delta);
+    return this.effect.apply(input, this.totalPower(), delta);
   }
 }
