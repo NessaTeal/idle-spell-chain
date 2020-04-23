@@ -8,5 +8,6 @@ export default function deserializeSpell(spell: Spell): Spell {
     deserializeEffect(spell.effect)
   );
   deserializedSpell.slot = spell.slot;
+  deserializedSpell.consumedPower = spell.consumedPower;
   return deserializedSpell;
 }

@@ -94,10 +94,10 @@ export default new Vuex.Store({
     },
     mergeSpells(state) {
       state.spells.forEach(spell => {
-        const increase = spell.power / 50;
+        const increase = spell.power / 50 + spell.consumedPower;
         state.chain.spells.forEach(chainSpell => {
           if (chainSpell) {
-            chainSpell.power += increase;
+            chainSpell.consumedPower += increase;
           }
         });
       });
