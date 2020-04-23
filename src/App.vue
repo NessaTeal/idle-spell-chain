@@ -46,6 +46,7 @@ export default class App extends Vue {
     this.lastTimestamp = timestamp;
 
     this.$store.state.chain.invoke(delta);
+    this.$store.commit("adjustSpellCost", { delta });
 
     this.saveTimer -= delta;
     if (this.saveTimer < 0) {
