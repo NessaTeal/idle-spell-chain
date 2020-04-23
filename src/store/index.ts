@@ -10,7 +10,8 @@ import deserializeSpell from "@/classes/spells/SpellDeserializer";
 
 Vue.use(Vuex);
 
-const SPELL_COST_INCREASE = 1.1;
+const SPELL_COST_INCREASE = 1.6;
+const SPELL_COST_DECREASE = 0.15;
 const ENTROPY_COST_INCREASE = 1.5;
 const SLOT_COST_INCREASE = 10;
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     chain: Chain.emptyChain(),
     dropzones: new Array<Element>(),
     spellCost: 10,
+    minimalSpellCost: 10,
     entropyCost: 100,
     slotCost: 1000
   },
@@ -86,6 +88,9 @@ export default new Vuex.Store({
       state.mana -= state.entropyCost;
       state.entropyCost *= ENTROPY_COST_INCREASE;
       state.entropy++;
+
+      state.minimalSpellCost = state.entropy * 10;
+      state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
     },
     mergeSpells(state) {
       state.spells.forEach(spell => {
@@ -99,6 +104,14 @@ export default new Vuex.Store({
 
       Vue.set(state, "spells", []);
     },
+    adjustSpellCost(state, { delta }) {
+      if (state.spellCost > state.minimalSpellCost) {
+        const spellCostDecrease =
+          state.spellCost * SPELL_COST_DECREASE * (delta / 1000);
+        state.spellCost -= spellCostDecrease;
+        state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
+      }
+    },
     save(state) {
       const saveFile = {
         spells: state.spells,
@@ -107,7 +120,8 @@ export default new Vuex.Store({
         entropy: state.entropy,
         slotCost: state.slotCost,
         spellCost: state.spellCost,
-        entropyCost: state.entropyCost
+        entropyCost: state.entropyCost,
+        minimalSpellCost: state.minimalSpellCost
       };
 
       localStorage.setItem("saveFile", JSON.stringify(saveFile));
@@ -121,6 +135,7 @@ export default new Vuex.Store({
         Vue.set(state, "slotCost", saveFile.slotCost);
         Vue.set(state, "spellCost", saveFile.spellCost);
         Vue.set(state, "entropyCost", saveFile.entropyCost);
+        Vue.set(state, "minimalSpellCost", saveFile.minimalSpellCost);
         Vue.set(state, "chain", deserializeChain(saveFile.chain));
         Vue.set(
           state,

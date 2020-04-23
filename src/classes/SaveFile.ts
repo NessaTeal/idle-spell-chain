@@ -8,5 +8,6 @@ export default class SaveFile {
   entropy!: number;
   slotCost!: number;
   spellCost!: number;
+  minimalSpellCost!: number;
   entropyCost!: number;
 }
