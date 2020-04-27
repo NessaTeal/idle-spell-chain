@@ -5,7 +5,8 @@ export default function deserializeSpell(spell: Spell): Spell {
   const deserializedSpell = new Spell(
     spell.name,
     spell.power,
-    deserializeEffect(spell.effect)
+    deserializeEffect(spell.effect),
+    spell.element
   );
   deserializedSpell.slot = spell.slot;
   deserializedSpell.consumedPower = spell.consumedPower;

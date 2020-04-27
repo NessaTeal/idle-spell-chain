@@ -6,6 +6,7 @@
   >
     <b>{{ spell.name }}</b>
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
+    <p>Element: {{ spell.element }}</p>
     <p>{{ spell.effect.class }}</p>
   </div>
 </template>
