@@ -5,7 +5,6 @@ import Spell from "@/classes/spells/Spell";
 import Chain from "@/classes/chain/Chain";
 import SpellFactory from "@/classes/spells/SpellFactory";
 import SaveFile from "@/classes/SaveFile";
-import EffectFactory from "@/classes/effects/EffectFactory";
 import deserializeChain from "@/classes/chain/ChainDeserializer";
 import deserializeSpell from "@/classes/spells/SpellDeserializer";
 
@@ -19,24 +18,9 @@ const SLOT_COST_INCREASE = 10;
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell(
-        "Small adder",
-        0.95,
-        EffectFactory.generateAddition(),
-        SpellElement.LIGHT
-      ),
-      new Spell(
-        "Doubler",
-        0.95,
-        EffectFactory.generateMultiply(),
-        SpellElement.FIRE
-      ),
-      new Spell(
-        "Invoker",
-        0.95,
-        EffectFactory.generateInvoke(),
-        SpellElement.ICE
-      )
+      new Spell("Small adder", 1, SpellElement.LIGHT),
+      new Spell("Doubler", 1, SpellElement.FIRE),
+      new Spell("Invoker", 1, SpellElement.ICE)
     ],
     mana: 0,
     entropy: 1,

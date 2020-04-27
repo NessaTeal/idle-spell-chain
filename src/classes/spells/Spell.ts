@@ -1,23 +1,15 @@
-import Effect from "../effects/Effect";
 import SpellElement from "./SpellElement";
 
 export default class Spell {
   name: string;
   power: number;
   consumedPower = 0;
-  effect: Effect;
   slot: number | undefined;
   element: SpellElement;
 
-  constructor(
-    name: string,
-    entropy: number,
-    effect: Effect,
-    element: SpellElement
-  ) {
+  constructor(name: string, entropy: number, element: SpellElement) {
     this.name = name;
     this.power = entropy;
-    this.effect = effect;
     this.element = element;
   }
 
@@ -26,6 +18,6 @@ export default class Spell {
   }
 
   cast(input: number, delta: number): number {
-    return this.effect.apply(input, this.totalPower(), delta);
+    return input + this.totalPower() * delta;
   }
 }

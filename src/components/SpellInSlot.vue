@@ -1,13 +1,8 @@
 <template>
-  <div
-    @mousedown="startDrag"
-    :class="'spell ' + spell.effect.class"
-    :style="dynamicStyle"
-  >
+  <div @mousedown="startDrag" class="spell" :style="dynamicStyle">
     <b>{{ spell.name }}</b>
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
     <p>Element: {{ spell.element }}</p>
-    <p>{{ spell.effect.class }}</p>
   </div>
 </template>
 
@@ -65,17 +60,5 @@ export default class SpellInSlot extends Vue {
   height: 100px;
   width: 100px;
   user-select: none;
-}
-
-.adder {
-  background: lightgreen;
-}
-
-.multiplier {
-  background: palevioletred;
-}
-
-.invoker {
-  background: goldenrod;
 }
 </style>

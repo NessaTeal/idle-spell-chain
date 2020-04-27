@@ -45,7 +45,8 @@ export default class App extends Vue {
     const delta = timestamp - this.lastTimestamp;
     this.lastTimestamp = timestamp;
 
-    this.$store.state.chain.invoke(delta);
+    const income = this.$store.state.chain.invoke(delta);
+    this.$store.commit("addMana", { mana: income });
     this.$store.commit("adjustSpellCost", { delta });
 
     this.saveTimer -= delta;

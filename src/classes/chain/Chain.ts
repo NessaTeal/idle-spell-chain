@@ -11,8 +11,8 @@ export default class Chain {
     return new Chain(new Array(3));
   }
 
-  invoke(delta: number) {
-    this.spells.reduce((acc: number, val: Spell | undefined) => {
+  invoke(delta: number): number {
+    return this.spells.reduce((acc: number, val: Spell | undefined) => {
       if (!val) {
         return acc;
       }
