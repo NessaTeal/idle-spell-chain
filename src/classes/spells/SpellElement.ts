@@ -1,10 +1,10 @@
 enum SpellElement {
-  FIRE,
-  WATER,
-  ICE,
-  LIGHTNING,
-  LIGHT,
-  SHADOW
+  FIRE = "Fire",
+  WATER = "Water",
+  ICE = "Ice",
+  LIGHTNING = "Lightning",
+  LIGHT = "Light",
+  SHADOW = "Shadow"
 }
 
 export default SpellElement;
