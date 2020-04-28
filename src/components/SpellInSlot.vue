@@ -3,6 +3,12 @@
     <b>{{ spell.name }}</b>
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
     <p>Element: {{ spell.element }}</p>
+    <div v-for="(affix, index) in spell.affixes" :key="index">
+      <p>Affix: {{ affix.class }}</p>
+      <p v-if="affix.class === 'Neighbour'">
+        Neighbour element: {{ affix.element }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -57,8 +63,8 @@ export default class SpellInSlot extends Vue {
 
 <style scoped>
 .spell {
-  height: 100px;
-  width: 100px;
+  height: 100%;
+  width: 100%;
   user-select: none;
 }
 </style>

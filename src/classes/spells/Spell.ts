@@ -1,4 +1,6 @@
 import SpellElement from "./SpellElement";
+import Affix from "../affixes/Affix";
+import Chain from "../chain/Chain";
 
 export default class Spell {
   name: string;
@@ -6,6 +8,7 @@ export default class Spell {
   consumedPower = 0;
   slot: number | undefined;
   element: SpellElement;
+  affixes: Affix[] = [];
 
   constructor(name: string, entropy: number, element: SpellElement) {
     this.name = name;
@@ -17,7 +20,14 @@ export default class Spell {
     return this.power + this.consumedPower;
   }
 
-  cast(input: number, delta: number): number {
-    return input + this.totalPower() * delta;
+  cast(input: number, delta: number, chain: Chain): number {
+    return (
+      input +
+      this.totalPower() *
+        delta *
+        this.affixes.reduce((acc: number, val: Affix): number => {
+          return acc * val.checkConditions(this, chain);
+        }, 1)
+    );
   }
 }

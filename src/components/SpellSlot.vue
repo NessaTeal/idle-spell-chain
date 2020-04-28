@@ -28,8 +28,8 @@ export default class Scroll extends Vue {
 
 <style scoped>
 .slot {
-  height: 100px;
-  width: 100px;
+  height: 180px;
+  width: 150px;
   border: 1px solid red;
 }
 </style>

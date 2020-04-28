@@ -17,7 +17,7 @@ export default class Chain {
         return acc;
       }
 
-      return val.cast(acc, delta);
+      return val.cast(acc, delta, this);
     }, 0);
   }
 }
