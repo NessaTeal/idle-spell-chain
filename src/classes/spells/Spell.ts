@@ -3,15 +3,13 @@ import Affix from "../affixes/Affix";
 import Chain from "../chain/Chain";
 
 export default class Spell {
-  name: string;
   power: number;
   consumedPower = 0;
   slot: number | undefined;
   element: SpellElement;
   affixes: Affix[] = [];
 
-  constructor(name: string, entropy: number, element: SpellElement) {
-    this.name = name;
+  constructor(entropy: number, element: SpellElement) {
     this.power = entropy;
     this.element = element;
   }

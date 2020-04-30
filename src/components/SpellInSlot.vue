@@ -1,6 +1,5 @@
 <template>
   <div @mousedown="startDrag" class="spell" :style="dynamicStyle">
-    <b>{{ spell.name }}</b>
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
     <p>Element: {{ spell.element }}</p>
     <div v-for="(affix, index) in spell.affixes" :key="index">

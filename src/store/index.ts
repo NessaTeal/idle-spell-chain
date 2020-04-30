@@ -18,9 +18,9 @@ const SLOT_COST_INCREASE = 10;
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell("Small adder", 1, SpellElement.LIGHT),
-      new Spell("Doubler", 1, SpellElement.FIRE),
-      new Spell("Invoker", 1, SpellElement.ICE)
+      new Spell(1, SpellElement.LIGHT),
+      new Spell(1, SpellElement.FIRE),
+      new Spell(1, SpellElement.ICE)
     ],
     mana: 0,
     entropy: 1,
