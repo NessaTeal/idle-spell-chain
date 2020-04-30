@@ -1,7 +1,11 @@
 <template>
   <div @mousedown="startDrag" class="spell" :style="dynamicStyle">
+    <img
+      :title="spell.element"
+      :src="spellElementImageUrl"
+      class="element-icon"
+    />
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
-    <p>Element: {{ spell.element }}</p>
     <div v-for="(affix, index) in spell.affixes" :key="index">
       <p>Affix: {{ affix.class }}</p>
       <p v-if="affix.class === 'Neighbour'">
@@ -14,6 +18,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Spell from "@/classes/spells/Spell";
+import { getImageUrl } from "@/classes/utils";
 
 @Component
 export default class SpellInSlot extends Vue {
@@ -57,6 +62,10 @@ export default class SpellInSlot extends Vue {
       ? `transform: translate(${this.left}px, ${this.top}px);`
       : "";
   }
+
+  get spellElementImageUrl() {
+    return getImageUrl(this.spell.element);
+  }
 }
 </script>
 
@@ -65,5 +74,11 @@ export default class SpellInSlot extends Vue {
   height: 100%;
   width: 100%;
   user-select: none;
+  background: #e0e0e0;
+}
+
+.element-icon {
+  width: 100%;
+  pointer-events: none;
 }
 </style>
