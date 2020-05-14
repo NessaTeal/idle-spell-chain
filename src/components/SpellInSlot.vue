@@ -1,10 +1,13 @@
 <template>
   <div @mousedown="startDrag" class="spell" :style="dynamicStyle">
-    <img
-      :title="spell.element"
-      :src="spellElementImageUrl"
-      class="element-icon"
-    />
+    <div>
+      <img
+        :title="spell.element"
+        :src="spellElementImageUrl"
+        class="element-icon"
+      />
+      <div></div>
+    </div>
     <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
     <div v-for="(affix, index) in spell.affixes" :key="index">
       <p>Affix: {{ affix.class }}</p>
