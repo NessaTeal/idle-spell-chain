@@ -7,6 +7,7 @@ import SpellFactory from "@/classes/spells/SpellFactory";
 import SaveFile from "@/classes/SaveFile";
 import deserializeChain from "@/classes/chain/ChainDeserializer";
 import deserializeSpell from "@/classes/spells/SpellDeserializer";
+import { Rarities } from "@/classes/RarityManager";
 
 Vue.use(Vuex);
 
@@ -18,9 +19,9 @@ const SLOT_COST_INCREASE = 10;
 export default new Vuex.Store({
   state: {
     spells: [
-      new Spell(1, SpellElement.LIGHT),
-      new Spell(1, SpellElement.FIRE),
-      new Spell(1, SpellElement.ICE),
+      new Spell(Rarities[0], SpellElement.LIGHT),
+      new Spell(Rarities[0], SpellElement.FIRE),
+      new Spell(Rarities[0], SpellElement.ICE),
     ],
     mana: 0,
     entropy: 1,
@@ -30,6 +31,8 @@ export default new Vuex.Store({
     minimalSpellCost: 10,
     entropyCost: 100,
     slotCost: 1000,
+    chance: 0.8,
+    maximumRarity: 2,
   },
   mutations: {
     addMana(state, { mana }) {
@@ -91,18 +94,6 @@ export default new Vuex.Store({
 
       state.minimalSpellCost = state.entropy * 10;
       state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
-    },
-    mergeSpells(state) {
-      state.spells.forEach((spell) => {
-        const increase = spell.power / 50 + spell.consumedPower;
-        state.chain.spells.forEach((chainSpell) => {
-          if (chainSpell) {
-            chainSpell.consumedPower += increase;
-          }
-        });
-      });
-
-      Vue.set(state, "spells", []);
     },
     adjustSpellCost(state, { delta }) {
       if (state.spellCost > state.minimalSpellCost) {

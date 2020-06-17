@@ -8,7 +8,8 @@
       />
       <div></div>
     </div>
-    <p>Power: {{ spell.totalPower().toFixed(3) }}</p>
+    <p>Rarity: {{ spell.rarity.rarity }}</p>
+    <p>Power: {{ spell.rarity.power }}</p>
     <div v-for="(affix, index) in spell.affixes" :key="index">
       <p>Affix: {{ affix.class }}</p>
       <p v-if="affix.class === 'Neighbour'">

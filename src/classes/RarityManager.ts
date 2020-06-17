@@ -1,73 +1,57 @@
-//           const Rarity = [{
-//               rarity: "Common",
-//               power: 1
-//             }, {
-//             rarity: "Good",
-//             power: 5
+import store from "@/store";
 
-//             },{
-//             rarity: "Rare",
-//             power: 30
+export type Rarity = {
+  rarity: string;
+  power: number;
+};
 
-//             },
-//             "Epic": {
+export const Rarities: Rarity[] = [
+  {
+    rarity: "Common",
+    power: 1,
+  },
+  {
+    rarity: "Good",
+    power: 5,
+  },
+  {
+    rarity: "Rare",
+    power: 30,
+  },
+  {
+    rarity: "Epic",
+    power: 100,
+  },
+  {
+    rarity: "Legendary",
+    power: 1000,
+  },
+  {
+    rarity: "Post-legendary",
+    power: 10000,
+  },
+  {
+    rarity: "Ultimate",
+    power: 100000,
+  },
+];
 
-//             },
-//             "Legendary": {
+export const getRandomRarity = (): Rarity => {
+  const chance = Math.E ** -(1 / store.state.entropy) / 2;
+  const maximumRarity = store.state.maximumRarity;
+  const rand = Math.random();
 
-//             },
-//             "Post-legendary": {
+  let probability = chance;
+  let remainingProbability = 1 - chance;
 
-//             },
-//             "Ultimate": {
+  for (let currentLevel = 0; currentLevel < maximumRarity; currentLevel++) {
+    if (rand < probability) {
+      return Rarities[currentLevel];
+    }
 
-//             }
-//           }]
-//           getRandomRarityIndex: function() {
-//             var rand = Math.random();
-//             var cumulativeProbability = 0;
-//             for(var i = 0; i < this.maxRarity - 1; i++) {
-//               cumulativeProbability += this.cards[i].probability;
+    probability += remainingProbability * chance;
+    remainingProbability = 1 - probability;
+  }
 
-//               if(rand <= cumulativeProbability) {
-//                 return i;
-//               }
-//             }
-
-//             return this.maxRarity;
-//           }
-
-//           increaseRarity: function() {
-//             this.cards.push({id: this.maxRarity, quantity: 0, income: 100, rarity: "Legendary", probability: 0})
-//             this.maxRarity++;
-//             this.updateProbabilites();
-//             this.canIncreaseRarity = false;
-//           }
-
-//           updateProbabilites: function() {
-//             var total = (this.maxRarity ** (this.probabilityFactor + 1)) / (this.probabilityFactor + 1);
-
-//             var integrals = [];
-
-//             for(var i = 0; i < this.maxRarity; i++) {
-//               integrals.push((this.maxRarity - i) ** (this.probabilityFactor + 1) / (this.probabilityFactor + 1))
-//             }
-
-//             integrals.push(0);
-
-//             console.log(integrals);
-//                         console.log(total);
-
-//             for(var i = 0; i < this.maxRarity; i++) {
-//               this.cards[i].probability = (integrals[i] - integrals[i + 1]) / total;
-//             }
-//           }
-//         },
-//         created: function() {
-//           this.updateProbabilites();
-//           setInterval(this.tick, 700);
-//         }
-//       })
-//     </script>
-//   </body>
-// </html>
+  return Rarities[maximumRarity];
+};

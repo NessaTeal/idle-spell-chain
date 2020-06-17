@@ -1,27 +1,23 @@
 import SpellElement from "./SpellElement";
 import Affix from "../affixes/Affix";
 import Chain from "../chain/Chain";
+import { Rarity } from "../RarityManager";
 
 export default class Spell {
-  power: number;
-  consumedPower = 0;
+  rarity: Rarity;
   slot: number | undefined;
   element: SpellElement;
   affixes: Affix[] = [];
 
-  constructor(entropy: number, element: SpellElement) {
-    this.power = entropy;
+  constructor(rarity: Rarity, element: SpellElement) {
+    this.rarity = rarity;
     this.element = element;
-  }
-
-  totalPower(): number {
-    return this.power + this.consumedPower;
   }
 
   cast(input: number, delta: number, chain: Chain): number {
     return (
       input +
-      this.totalPower() *
+      this.rarity.power *
         delta *
         this.affixes.reduce((acc: number, val: Affix): number => {
           return acc * val.checkConditions(this, chain);
