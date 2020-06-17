@@ -19,8 +19,8 @@ import Spell from "@/classes/spells/Spell";
 
 @Component({
   components: {
-    SpellSlot
-  }
+    SpellSlot,
+  },
 })
 export default class Library extends Vue {
   @State spells!: Spell[];

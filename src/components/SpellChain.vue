@@ -18,8 +18,8 @@ import SpellSlot from "./SpellSlot.vue";
 
 @Component({
   components: {
-    SpellSlot
-  }
+    SpellSlot,
+  },
 })
 export default class Shop extends Vue {
   @State chain!: Chain;

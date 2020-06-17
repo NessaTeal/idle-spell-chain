@@ -29,8 +29,8 @@ import TopBar from "./components/TopBar.vue";
     Shop,
     SpellChain,
     SpellSlot,
-    TopBar
-  }
+    TopBar,
+  },
 })
 export default class App extends Vue {
   lastTimestamp = 0;

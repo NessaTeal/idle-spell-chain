@@ -5,7 +5,7 @@ export default function deserializeSpell(spell: Spell): Spell {
   const deserializedSpell = new Spell(spell.power, spell.element);
   deserializedSpell.slot = spell.slot;
   deserializedSpell.consumedPower = spell.consumedPower;
-  deserializedSpell.affixes = spell.affixes.map(affix =>
+  deserializedSpell.affixes = spell.affixes.map((affix) =>
     deserializeAffix(affix)
   );
   return deserializedSpell;

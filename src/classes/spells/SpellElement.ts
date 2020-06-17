@@ -4,7 +4,7 @@ enum SpellElement {
   ICE = "Ice",
   LIGHTNING = "Lightning",
   LIGHT = "Light",
-  SHADOW = "Shadow"
+  SHADOW = "Shadow",
 }
 
 export default SpellElement;

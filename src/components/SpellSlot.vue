@@ -11,8 +11,8 @@ import SpellInSlot from "./SpellInSlot.vue";
 
 @Component({
   components: {
-    SpellInSlot
-  }
+    SpellInSlot,
+  },
 })
 export default class Scroll extends Vue {
   @Prop(Spell) spell!: Spell;

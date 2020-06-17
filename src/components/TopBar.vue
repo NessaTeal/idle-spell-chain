@@ -20,8 +20,8 @@ import TopValueWithLogo from "./TopValueWithLogo.vue";
 
 @Component({
   components: {
-    TopValueWithLogo
-  }
+    TopValueWithLogo,
+  },
 })
 export default class TopBar extends Vue {
   @State mana!: number;

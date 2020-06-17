@@ -20,7 +20,7 @@ export default new Vuex.Store({
     spells: [
       new Spell(1, SpellElement.LIGHT),
       new Spell(1, SpellElement.FIRE),
-      new Spell(1, SpellElement.ICE)
+      new Spell(1, SpellElement.ICE),
     ],
     mana: 0,
     entropy: 1,
@@ -29,7 +29,7 @@ export default new Vuex.Store({
     spellCost: 10,
     minimalSpellCost: 10,
     entropyCost: 100,
-    slotCost: 1000
+    slotCost: 1000,
   },
   mutations: {
     addMana(state, { mana }) {
@@ -40,14 +40,14 @@ export default new Vuex.Store({
     },
     moveSpell(state, { spell, slot }) {
       const switchFromSpell = state.chain.spells.find(
-        findSpell => findSpell && findSpell.slot === slot
+        (findSpell) => findSpell && findSpell.slot === slot
       );
 
       if (spell.slot !== undefined) {
         Vue.set(state.chain.spells, spell.slot, switchFromSpell);
       } else {
         state.spells = state.spells.filter(
-          filterSpell => filterSpell !== spell
+          (filterSpell) => filterSpell !== spell
         );
       }
 
@@ -93,9 +93,9 @@ export default new Vuex.Store({
       state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
     },
     mergeSpells(state) {
-      state.spells.forEach(spell => {
+      state.spells.forEach((spell) => {
         const increase = spell.power / 50 + spell.consumedPower;
-        state.chain.spells.forEach(chainSpell => {
+        state.chain.spells.forEach((chainSpell) => {
           if (chainSpell) {
             chainSpell.consumedPower += increase;
           }
@@ -121,7 +121,7 @@ export default new Vuex.Store({
         slotCost: state.slotCost,
         spellCost: state.spellCost,
         entropyCost: state.entropyCost,
-        minimalSpellCost: state.minimalSpellCost
+        minimalSpellCost: state.minimalSpellCost,
       };
 
       localStorage.setItem("saveFile", JSON.stringify(saveFile));
@@ -140,11 +140,11 @@ export default new Vuex.Store({
         Vue.set(
           state,
           "spells",
-          saveFile.spells.map(spell => deserializeSpell(spell))
+          saveFile.spells.map((spell) => deserializeSpell(spell))
         );
       }
-    }
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 });
