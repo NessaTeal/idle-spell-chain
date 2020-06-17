@@ -15,6 +15,7 @@ const SPELL_COST_INCREASE = 1.6;
 const SPELL_COST_DECREASE = 0.15;
 const ENTROPY_COST_INCREASE = 1.5;
 const SLOT_COST_INCREASE = 10;
+const BASE_CONCENTRATION_PER_SECOND = 20;
 
 export default new Vuex.Store({
   state: {
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     slotCost: 1000,
     chance: 0.8,
     maximumRarity: 2,
+    concentration: 0,
   },
   mutations: {
     addMana(state, { mana }) {
@@ -102,6 +104,12 @@ export default new Vuex.Store({
         state.spellCost -= spellCostDecrease;
         state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
       }
+    },
+    concentrate(state, { delta }) {
+      state.concentration += BASE_CONCENTRATION_PER_SECOND * (delta / 1000);
+      state.mana +=
+        state.chain.invoke() * Math.floor(state.concentration / 100);
+      state.concentration %= 100;
     },
     save(state) {
       const saveFile = {

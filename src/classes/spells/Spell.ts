@@ -14,11 +14,10 @@ export default class Spell {
     this.element = element;
   }
 
-  cast(input: number, delta: number, chain: Chain): number {
+  cast(input: number, chain: Chain): number {
     return (
       input +
       this.rarity.power *
-        delta *
         this.affixes.reduce((acc: number, val: Affix): number => {
           return acc * val.checkConditions(this, chain);
         }, 1)

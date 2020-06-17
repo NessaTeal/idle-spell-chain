@@ -1,15 +1,18 @@
 <template>
-  <div class="container">
-    <top-value-with-logo
-      logoName="mana"
-      tooltip="Mana, your primary resource"
-      :value="Math.floor(mana)"
-    />
-    <top-value-with-logo
-      logoName="entropy"
-      tooltip="Entropy, increases quality of spells"
-      :value="entropy"
-    />
+  <div class="outer-container">
+    <div class="container">
+      <top-value-with-logo
+        logoName="mana"
+        tooltip="Mana, your primary resource"
+        :value="Math.floor(mana)"
+      />
+      <top-value-with-logo
+        logoName="entropy"
+        tooltip="Entropy, increases quality of spells"
+        :value="entropy"
+      />
+    </div>
+    <md-progress-bar :md-value="Math.floor(concentration)"></md-progress-bar>
   </div>
 </template>
 
@@ -26,16 +29,23 @@ import TopValueWithLogo from "./TopValueWithLogo.vue";
 export default class TopBar extends Vue {
   @State mana!: number;
   @State entropy!: number;
+  @State concentration!: number;
 }
 </script>
 
 <style scoped>
+.outer-container {
+  display: flex;
+  width: 640px;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+}
+
 .container {
   display: flex;
   flex-direction: row;
-  width: 640px;
   justify-content: space-evenly;
-  margin: auto;
   height: 32px;
 }
 
