@@ -1,14 +1,14 @@
 <template>
   <div>
-    <button @click="buyNewSpell">
+    <md-button class="md-raised" @click="buyNewSpell">
       Buy new random spell: {{ Math.ceil(spellCost) }}
-    </button>
-    <button @click="increaseEntropy">
+    </md-button>
+    <md-button class="md-raised" @click="increaseEntropy">
       Increase entropy: {{ Math.ceil(entropyCost) }}
-    </button>
-    <button @click="buyNewSlot">
+    </md-button>
+    <md-button class="md-raised" @click="buyNewSlot">
       But additional slot: {{ Math.ceil(slotCost) }}
-    </button>
+    </md-button>
   </div>
 </template>
 
