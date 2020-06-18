@@ -16,6 +16,7 @@ const SPELL_COST_DECREASE = 0.15;
 const ENTROPY_COST_INCREASE = 1.5;
 const SLOT_COST_INCREASE = 10;
 const BASE_CONCENTRATION_PER_SECOND = 20;
+const BASE_CONCENTRATION_PER_CLICK = 7;
 
 export default new Vuex.Store({
   state: {
@@ -106,6 +107,12 @@ export default new Vuex.Store({
     },
     concentrate(state, { delta }) {
       state.concentration += BASE_CONCENTRATION_PER_SECOND * delta;
+      state.mana +=
+        state.chain.invoke() * Math.floor(state.concentration / 100);
+      state.concentration %= 100;
+    },
+    manuallyConcentrate(state) {
+      state.concentration += BASE_CONCENTRATION_PER_CLICK;
       state.mana +=
         state.chain.invoke() * Math.floor(state.concentration / 100);
       state.concentration %= 100;

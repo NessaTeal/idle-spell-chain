@@ -13,12 +13,15 @@
       />
     </div>
     <md-progress-bar :md-value="Math.floor(concentration)"></md-progress-bar>
+    <md-button class="md-primary md-raised" @click="manuallyConcentrate"
+      >Concentrate</md-button
+    >
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { State } from "vuex-class";
+import { Mutation, State } from "vuex-class";
 import TopValueWithLogo from "./TopValueWithLogo.vue";
 
 @Component({
@@ -30,6 +33,8 @@ export default class TopBar extends Vue {
   @State mana!: number;
   @State entropy!: number;
   @State concentration!: number;
+
+  @Mutation manuallyConcentrate!: () => void;
 }
 </script>
 
