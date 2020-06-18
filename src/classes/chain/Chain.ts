@@ -11,13 +11,13 @@ export default class Chain {
     return new Chain(new Array(3));
   }
 
-  invoke(delta: number): number {
+  invoke(): number {
     return this.spells.reduce((acc: number, val: Spell | undefined) => {
       if (!val) {
         return acc;
       }
 
-      return val.cast(acc, delta, this);
+      return val.cast(acc, this);
     }, 0);
   }
 }
