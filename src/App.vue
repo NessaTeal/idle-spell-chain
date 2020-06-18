@@ -34,7 +34,7 @@ import TopBar from "./components/TopBar.vue";
 })
 export default class App extends Vue {
   lastTimestamp = 0;
-  saveTimer = 15 * 1000;
+  saveTimer = 15;
 
   created() {
     this.$store.commit("load");
@@ -42,7 +42,7 @@ export default class App extends Vue {
   }
 
   loop(timestamp: number) {
-    const delta = timestamp - this.lastTimestamp;
+    const delta = (timestamp - this.lastTimestamp) / 1000;
     this.lastTimestamp = timestamp;
 
     this.$store.commit("adjustSpellCost", { delta });
@@ -52,7 +52,7 @@ export default class App extends Vue {
 
     this.saveTimer -= delta;
     if (this.saveTimer < 0) {
-      this.saveTimer = 15 * 1000;
+      this.saveTimer = 15;
       this.$store.commit("save");
     }
 

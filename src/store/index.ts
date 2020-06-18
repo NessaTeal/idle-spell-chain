@@ -99,14 +99,13 @@ export default new Vuex.Store({
     },
     adjustSpellCost(state, { delta }) {
       if (state.spellCost > state.minimalSpellCost) {
-        const spellCostDecrease =
-          state.spellCost * SPELL_COST_DECREASE * (delta / 1000);
+        const spellCostDecrease = state.spellCost * SPELL_COST_DECREASE * delta;
         state.spellCost -= spellCostDecrease;
         state.spellCost = Math.max(state.minimalSpellCost, state.spellCost);
       }
     },
     concentrate(state, { delta }) {
-      state.concentration += BASE_CONCENTRATION_PER_SECOND * (delta / 1000);
+      state.concentration += BASE_CONCENTRATION_PER_SECOND * delta;
       state.mana +=
         state.chain.invoke() * Math.floor(state.concentration / 100);
       state.concentration %= 100;
