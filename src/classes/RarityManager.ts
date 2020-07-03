@@ -37,7 +37,8 @@ export const Rarities: Rarity[] = [
 ];
 
 export const getRandomRarity = (): Rarity => {
-  const chance = Math.E ** -(1 / store.state.entropy) / 2;
+  const chance =
+    0.8 - Math.log((0.73325 * Math.sqrt(store.state.entropy)) / 10 + 1);
   const maximumRarity = store.state.maximumRarity;
   const rand = Math.random();
 
